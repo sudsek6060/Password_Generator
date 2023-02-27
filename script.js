@@ -8,12 +8,7 @@ const generateEl = document.getElementById('generate')
 const clipboardEl = document.getElementById('clipboard')
 
 
-const randomFunc = {
-    lower: getRandomLower,
-    upper: getRandomUpper,
-    number: getRandomNumber,
-    symbol: getRandomSymbol
-}
+
 // 
 clipboardEl.addEventListener('click', () => {
     // clipboardEl.select()
@@ -25,53 +20,71 @@ generateEl.addEventListener('click', () => {
     resultEl.textContent = valu;
 })
 
-function generatePassword(lower, upper, number, symbol, length) {
-   length  = Math.floor((lengthEl.value)/4);
-   let password = ''
+function generatePassword() {
+    length = Math.floor((lengthEl.value) / 4);
+    let password = ''
     for (let i = 0; i < length; i++) {
-        password += getRandomUpper() + getRandomLower() + getRandomSymbol() + getRandomNumber()
+        password +=  getRandomUpper() +
+            getRandomLower() +
+            getRandomSymbol() +
+            getRandomNumber()
     }
     return password;
-   
+
 }
 
 
 function getRandomLower() {
+    if(lowercaseEl.checked){
     const lower = 'abcdefghijklmnopqrstuvwxyz';
     let lowerChars = '';
-    
-     lowerChars += lower.charAt(Math.floor(Math.random() * lower.length))        
-    
+
+    lowerChars += lower.charAt(Math.floor(Math.random() * lower.length))
+
     return lowerChars
-    
+    }else{
+        return getRandomUpper()
+    }
 }
 
 function getRandomUpper() {
-    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if(uppercaseEl.checked){
+        const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let upperChars = '';
-    
-     upperChars += upper[Math.floor(Math.random() * upper.length)]        
-    
+
+    upperChars += upper[Math.floor(Math.random() * upper.length)]
+
     return upperChars;
-    
+
+    }else{
+        return getRandomNumber()
+    }
 }
 
 
 function getRandomNumber() {
-    const num = '1234567890';
+    if(numbersEl.checked){
+        const num = '1234567890';
     let nums = '';
-    
-     nums += num[Math.floor(Math.random() * num.length)]        
-    
+
+    nums += num[Math.floor(Math.random() * num.length)]
+
     return nums;
-    
+    }else{
+        return getRandomSymbol()
+    }
+
 }
 
 
 function getRandomSymbol() {
-    const sym = '!@#$&^%'
+    if(symbolsEl.checked){
+        const sym = '!@#$&^%'
     let syms = '';
     return syms = sym[Math.floor(Math.random() * sym.length)]
-   
+    }else{
+        return getRandomLower()
+    }
+
 }
 
