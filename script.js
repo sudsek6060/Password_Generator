@@ -7,12 +7,24 @@ const symbolsEl = document.getElementById('symbols')
 const generateEl = document.getElementById('generate')
 const clipboardEl = document.getElementById('clipboard')
 
+console.log(resultEl);
 
+// const text = resultEl.innerHTML;
 
-// 
-clipboardEl.addEventListener('click', () => {
-    // clipboardEl.select()
-    // document.execCommand('copy');
+// const copyContent = async () => {
+//     try {
+//       await navigator.clipboard.writeText(text);
+     
+//     } catch (err) {
+//       console.error('Failed to copy: ', err);
+//     }
+// }
+
+// // 
+clipboardEl.addEventListener('click', async function(){
+    const text = resultEl.textContent;
+    const textCopy =  await navigator.clipboard.writeText(text);
+    textCopy !== 'empty' ? alert('Copied Sucessfuly'): alert('failed to copy')
 })
 
 generateEl.addEventListener('click', () => {
